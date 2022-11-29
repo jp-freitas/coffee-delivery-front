@@ -27,6 +27,7 @@ This project was developed with the following technologies:
 
 - [ReactJS](https://beta.reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
+- [ESLint](https://eslint.org/)
 - [Node e NPM](https://nodejs.org/)
 - [Vite](https://vitejs.dev/)
 
