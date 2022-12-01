@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
-  height: 6rem;
+  height: 6.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,6 +31,10 @@ export const ActionsContainer = styled.div`
 export const Location = styled.span`
   background: ${(props) => props.theme['purple-100']};
   color: ${(props) => props.theme['purple-500']};
+
+  p {
+    color: ${(props) => props.theme['purple-900']};
+  }
 `
 
 export const Cart = styled.span`

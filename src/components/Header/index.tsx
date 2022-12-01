@@ -10,7 +10,7 @@ export function Header() {
       <ActionsContainer>
         <Location>
           <MapPin size={22} weight="fill" />
-          Itumbiara, GO
+          <p>Itumbiara, GO</p>
         </Location>
         <Cart>
           <ShoppingCart size={22} weight="fill" />
