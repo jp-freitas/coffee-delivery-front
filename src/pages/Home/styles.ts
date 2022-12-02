@@ -27,7 +27,8 @@ export const InfoSection = styled.section`
     color: ${(props) => props.theme['gray-800']};
   }
 `
-export const Advantages = styled.div`
+
+export const AdvantagesSection = styled.div`
   width: 100%;
   margin-top: 3rem;
   display: flex;
@@ -39,27 +40,38 @@ export const Advantages = styled.div`
     align-items: flex-start;
     margin: 0;
   }
+`
 
-  p {
+const ADVANTAGES_COLORS = {
+  yellow: 'yellow-500',
+  gold: 'yellow-900',
+  black: 'gray-900',
+  purple: 'purple-500',
+} as const
+
+interface AdvantagesItemColor {
+  itemColor: 'yellow' | 'gold' | 'black' | 'purple'
+}
+
+export const AdvantagesItem = styled.p<AdvantagesItemColor>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  color: ${(props) => props.theme['gray-700']};
+  margin: 0;
+  margin-top: 1.25rem;
+
+  span {
+    margin: 0;
+    margin-right: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
-    color: ${(props) => props.theme['gray-700']};
-    margin: 0;
-    margin-top: 1.25rem;
-
-    span {
-      margin: 0;
-      margin-right: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      border-radius: 100%;
-      background: ${(props) => props.theme['gray-700']};
-      color: ${(props) => props.theme.white};
-    }
+    padding: 8px;
+    border-radius: 100%;
+    background: ${(props) => props.theme[ADVANTAGES_COLORS[props.itemColor]]};
+    color: ${(props) => props.theme.white};
   }
 `
 

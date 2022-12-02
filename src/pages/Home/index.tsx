@@ -1,6 +1,13 @@
-import { Advantages, HomeContainer, ImageSection, InfoSection } from './styles'
+import { ShoppingCart, Timer, Package, Coffee } from 'phosphor-react'
+
+import {
+  AdvantagesItem,
+  AdvantagesSection,
+  HomeContainer,
+  ImageSection,
+  InfoSection,
+} from './styles'
 import IntroSectionImage from '../../assets/image-intro-section.svg'
-import { ShoppingCart } from 'phosphor-react'
 
 export function Home() {
   return (
@@ -11,36 +18,36 @@ export function Home() {
           Com o Coffee Delivery você recebe seu café onde estiver, a qualquer
           hora
         </p>
-        <Advantages>
+        <AdvantagesSection>
           <div>
-            <p>
+            <AdvantagesItem itemColor="gold">
               <span>
-                <ShoppingCart size={16} weight="fill" />
+                <ShoppingCart size={18} weight="fill" />
               </span>
               Compra simples e segura
-            </p>
-            <p>
+            </AdvantagesItem>
+            <AdvantagesItem itemColor="yellow">
               <span>
-                <ShoppingCart size={16} weight="fill" />
+                <Timer size={18} weight="fill" />
               </span>
               Entrega rápida e rastreada
-            </p>
+            </AdvantagesItem>
           </div>
           <div>
-            <p>
+            <AdvantagesItem itemColor="black">
               <span>
-                <ShoppingCart size={16} weight="fill" />
+                <Package size={18} weight="fill" />
               </span>
               Embalagem mantém o café intacto
-            </p>
-            <p>
+            </AdvantagesItem>
+            <AdvantagesItem itemColor="purple">
               <span>
-                <ShoppingCart size={16} weight="fill" />
+                <Coffee size={18} weight="fill" />
               </span>
               O café chega fresquinho até você
-            </p>
+            </AdvantagesItem>
           </div>
-        </Advantages>
+        </AdvantagesSection>
       </InfoSection>
       <ImageSection>
         <img
