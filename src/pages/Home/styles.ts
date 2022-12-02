@@ -19,7 +19,7 @@ export const InfoSection = styled.section`
     color: ${(props) => props.theme['gray-900']};
   }
 
-  p {
+  > p {
     margin-top: 1rem;
     font-weight: 400;
     line-height: 130%;
@@ -57,7 +57,7 @@ export const AdvantagesItem = styled.p<AdvantagesItemColor>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.5rem;
+  font-size: 1rem;
   color: ${(props) => props.theme['gray-700']};
   margin: 0;
   margin-top: 1.25rem;
