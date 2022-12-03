@@ -6,10 +6,12 @@ export const HomeContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 9.8125rem;
 `
 
 export const MainContainer = styled.main`
-  padding: 5rem 0;
+  margin-top: 7rem;
+  height: 34rem;
   display: flex;
   align-items: center;
   justify-content: center;

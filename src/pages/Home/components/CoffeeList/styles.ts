@@ -13,7 +13,8 @@ export const Title = styled.h1`
 `
 
 export const CardList = styled.div`
+  margin-top: 3.375rem;
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr;
-  gap: 1rem;
+  grid-template-columns: 2fr 2fr 2fr 2fr;
+  gap: 2.5rem 2rem;
 `

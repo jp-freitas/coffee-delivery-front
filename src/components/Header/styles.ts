@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 100%;
+  width: 74rem;
+  z-index: 1;
   height: 6.5rem;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: ${(props) => props.theme['gray-100']};
 
   img {
     margin-left: 0;
