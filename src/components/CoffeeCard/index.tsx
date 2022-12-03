@@ -18,7 +18,7 @@ interface CoffeeCardProps {
   tags: string[]
   name: string
   description: string
-  amount: number
+  amount: string
 }
 
 export function CoffeeCard({
@@ -41,7 +41,7 @@ export function CoffeeCard({
       <BuySection>
         <Prefix>
           R$
-          <Amount>{amount.toFixed(2)}</Amount>
+          <Amount>{parseFloat(amount).toFixed(2)}</Amount>
         </Prefix>
         <Count>
           <MinusContainer>
