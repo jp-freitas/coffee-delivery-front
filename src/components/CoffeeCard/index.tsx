@@ -10,23 +10,38 @@ import {
   PlusContainer,
   Prefix,
   Tag,
+  TagSection,
   Title,
 } from './styles'
+interface CoffeeCardProps {
+  image: string
+  tags: string[]
+  name: string
+  description: string
+  amount: number
+}
 
-import coffeeExpresso from '../../assets/coffee-expresso.svg'
-
-export function CoffeeCard() {
+export function CoffeeCard({
+  image,
+  tags,
+  name,
+  description,
+  amount,
+}: CoffeeCardProps) {
   return (
     <CardContainer>
-      <img src={coffeeExpresso} alt="Café Irlandês" />
-      <Tag>TRADICIONAL</Tag>
-      <Title>Expresso Tradicional</Title>
-      <Description>
-        O tradicional café feito com água quente e grãos moídos
-      </Description>
+      <img src={image} alt={`Imagem representativa a ${name}`} />
+      <TagSection>
+        {tags.map((tag) => {
+          return <Tag key={tag}>{tag.toUpperCase()}</Tag>
+        })}
+      </TagSection>
+      <Title>{name}</Title>
+      <Description>{description}</Description>
       <BuySection>
         <Prefix>
-          R$<Amount>9,90</Amount>
+          R$
+          <Amount>{amount.toFixed(2)}</Amount>
         </Prefix>
         <Count>
           <MinusContainer>

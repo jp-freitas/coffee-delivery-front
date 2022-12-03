@@ -2,23 +2,29 @@ import styled from 'styled-components'
 
 export const CardContainer = styled.div`
   background: ${(props) => props.theme['gray-200']};
-  height: 19.375rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1.25rem 2rem;
   border-radius: 0.375rem 2.25rem 0.375rem 2.25rem;
 
   img {
     width: 60%;
     position: relative;
-    bottom: 7%;
+    bottom: 15%;
   }
 `
 
+export const TagSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
 export const Tag = styled.span`
-  margin-top: 0.75rem;
+  margin-top: -1.8rem;
+  margin-right: 0.25rem;
   padding: 0.25rem 0.5rem;
   background: ${(props) => props.theme['yellow-100']};
   color: ${(props) => props.theme['yellow-900']};
@@ -34,6 +40,7 @@ export const Title = styled.h1`
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 130%;
+  color: ${(props) => props.theme['gray-800']};
 `
 
 export const Description = styled.p`
@@ -73,11 +80,11 @@ export const Prefix = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: ${(props) => props.theme['gray-700']};
 `
 
-export const Amount = styled.p`
+export const Amount = styled.span`
   margin-left: 0.25rem;
-  margin-bottom: 0.25rem;
   font-family: 'Baloo 2', cursive;
   font-size: 1.5rem;
   font-weight: 800;
