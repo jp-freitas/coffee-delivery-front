@@ -10,7 +10,7 @@ export const HomeContainer = styled.div`
 `
 
 export const MainContainer = styled.main`
-  margin-top: 7rem;
+  margin-top: 4rem;
   height: 34rem;
   display: flex;
   align-items: center;
@@ -18,7 +18,7 @@ export const MainContainer = styled.main`
 `
 
 export const InfoSection = styled.section`
-  width: 50%;
+  width: 60%;
 
   h1 {
     font-family: 'Baloo 2', sans-serif;
@@ -91,7 +91,7 @@ export const ImageSection = styled.section`
   justify-content: center;
 
   img {
-    width: 85%;
+    width: 95%;
     margin-right: 0;
   }
 `

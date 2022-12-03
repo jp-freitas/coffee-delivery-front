@@ -2,18 +2,26 @@ import styled from 'styled-components'
 
 export const CardContainer = styled.div`
   background: ${(props) => props.theme['gray-200']};
+  border-radius: 0.375rem 2.25rem 0.375rem 2.25rem;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem 2rem;
-  border-radius: 0.375rem 2.25rem 0.375rem 2.25rem;
 
   img {
     width: 60%;
     position: relative;
-    bottom: 15%;
+    bottom: 10%;
   }
+`
+
+export const CardContent = styled.div`
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `
 
 export const TagSection = styled.div`
@@ -35,7 +43,7 @@ export const Tag = styled.span`
 `
 
 export const Title = styled.h1`
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   font-family: 'Baloo 2', cursive;
   font-size: 1.25rem;
   font-weight: 700;
@@ -56,6 +64,7 @@ export const BuySection = styled.div`
   margin-top: 2.0625rem;
   display: flex;
   align-items: center;
+  padding: 0 0.5rem;
 
   > button {
     margin: 0;

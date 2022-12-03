@@ -1,14 +1,21 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 74rem;
+  width: 100%;
   z-index: 1;
   height: 6.5rem;
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   background: ${(props) => props.theme['gray-100']};
+`
+
+export const Content = styled.div`
+  width: 74rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   img {
     margin-left: 0;
@@ -22,7 +29,6 @@ export const ActionsContainer = styled.div`
   justify-content: center;
 
   span {
-    margin-right: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,6 +38,7 @@ export const ActionsContainer = styled.div`
 `
 
 export const Location = styled.span`
+  margin-right: 0.5rem;
   background: ${(props) => props.theme['purple-100']};
   color: ${(props) => props.theme['purple-500']};
 
@@ -41,6 +48,7 @@ export const Location = styled.span`
 `
 
 export const Cart = styled.span`
+  margin-right: 0;
   background: ${(props) => props.theme['yellow-100']};
   color: ${(props) => props.theme['yellow-500']};
 `

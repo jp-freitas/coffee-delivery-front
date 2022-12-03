@@ -3,6 +3,7 @@ import {
   Amount,
   BuySection,
   CardContainer,
+  CardContent,
   Count,
   Description,
   MinusContainer,
@@ -31,31 +32,33 @@ export function CoffeeCard({
   return (
     <CardContainer>
       <img src={image} alt={`Imagem representativa a ${name}`} />
-      <TagSection>
-        {tags.map((tag) => {
-          return <Tag key={tag}>{tag.toUpperCase()}</Tag>
-        })}
-      </TagSection>
-      <Title>{name}</Title>
-      <Description>{description}</Description>
-      <BuySection>
-        <Prefix>
-          R$
-          <Amount>{parseFloat(amount).toFixed(2)}</Amount>
-        </Prefix>
-        <Count>
-          <MinusContainer>
-            <Minus size={14} weight="bold" />
-          </MinusContainer>
-          <Number>1</Number>
-          <PlusContainer>
-            <Plus size={14} weight="bold" />
-          </PlusContainer>
-        </Count>
-        <button>
-          <ShoppingCart size={20} weight="fill" />
-        </button>
-      </BuySection>
+      <CardContent>
+        <TagSection>
+          {tags.map((tag) => {
+            return <Tag key={tag}>{tag.toUpperCase()}</Tag>
+          })}
+        </TagSection>
+        <Title>{name}</Title>
+        <Description>{description}</Description>
+        <BuySection>
+          <Prefix>
+            R$
+            <Amount>{parseFloat(amount).toFixed(2)}</Amount>
+          </Prefix>
+          <Count>
+            <MinusContainer>
+              <Minus size={14} weight="bold" />
+            </MinusContainer>
+            <Number>1</Number>
+            <PlusContainer>
+              <Plus size={14} weight="bold" />
+            </PlusContainer>
+          </Count>
+          <button>
+            <ShoppingCart size={20} weight="fill" />
+          </button>
+        </BuySection>
+      </CardContent>
     </CardContainer>
   )
 }
