@@ -12,7 +12,7 @@ export const CardContainer = styled.div`
   img {
     width: 60%;
     position: relative;
-    bottom: 10%;
+    bottom: 15%;
   }
 `
 
@@ -31,7 +31,7 @@ export const TagSection = styled.div`
 `
 
 export const Tag = styled.span`
-  margin-top: -1.8rem;
+  margin-top: -1.75rem;
   margin-right: 0.25rem;
   padding: 0.25rem 0.5rem;
   background: ${(props) => props.theme['yellow-100']};

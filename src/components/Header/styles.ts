@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.header`
   width: 100%;
   z-index: 1;
   height: 6.5rem;
@@ -17,23 +17,27 @@ export const Content = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  a {
+    margin-left: 0;
+  }
+
   img {
     margin-left: 0;
   }
-`
 
-export const ActionsContainer = styled.div`
-  margin-right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  span {
+  nav {
+    margin-right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    padding: 0.5rem;
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      padding: 0.5rem;
+    }
   }
 `
 
