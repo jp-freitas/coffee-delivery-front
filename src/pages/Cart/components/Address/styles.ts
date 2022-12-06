@@ -54,5 +54,42 @@ export const AddressSectionContent = styled.form`
     color: ${(props) => props.theme['gray-800']};
     border: 1px solid ${(props) => props.theme['gray-400']};
     border-radius: 0.25rem;
+
+    &::placeholder {
+      color: ${(props) => props.theme['gray-600']};
+    }
+
+    :nth-child(2) {
+      width: 100%;
+    }
+  }
+`
+
+export const FirstGroup = styled.div`
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  > :nth-child(2) {
+    width: 100%;
+  }
+`
+
+export const SecondGroup = styled.div`
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  > :nth-child(2) {
+    width: 70%;
+  }
+  > :nth-child(3) {
+    width: 15%;
   }
 `

@@ -1,11 +1,7 @@
 import { Address } from './components/Address'
+import { OrderInformation } from './components/OrderInformation'
 import { Payment } from './components/Payment'
-import {
-  CompleteOrder,
-  Container,
-  OrderInformationContainer,
-  OrderInformationContent,
-} from './styles'
+import { CompleteOrder, Container, OrderInformationContainer } from './styles'
 
 export function Cart() {
   return (
@@ -17,7 +13,7 @@ export function Cart() {
       </CompleteOrder>
       <OrderInformationContainer>
         <h1>Cafés selecionados</h1>
-        <OrderInformationContent></OrderInformationContent>
+        <OrderInformation />
       </OrderInformationContainer>
     </Container>
   )

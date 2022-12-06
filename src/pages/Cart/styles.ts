@@ -40,8 +40,4 @@ export const OrderInformationContainer = styled.section`
   }
 `
 
-export const OrderInformationContent = styled.section`
-  background: ${(props) => props.theme['gray-200']};
-  border-radius: 0.375rem 2.75rem 0.375rem 2.75rem;
-  padding: 2.5rem;
-`
+export const OrderInformationContent = styled.section``

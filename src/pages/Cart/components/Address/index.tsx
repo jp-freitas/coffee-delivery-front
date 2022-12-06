@@ -4,6 +4,8 @@ import {
   AddressSectionContent,
   AddressSectionHeader,
   AddressSectionTitle,
+  FirstGroup,
+  SecondGroup,
 } from './styles'
 
 export function Address() {
@@ -19,15 +21,15 @@ export function Address() {
       <AddressSectionContent>
         <input type="number" placeholder="CEP" />
         <input type="text" placeholder="Rua" />
-        <div>
+        <FirstGroup>
           <input type="number" placeholder="Número" />
           <input type="text" placeholder="Complemento" />
-        </div>
-        <div>
+        </FirstGroup>
+        <SecondGroup>
           <input type="text" placeholder="Bairro" />
           <input type="text" placeholder="Cidade" />
           <input type="text" placeholder="UF" />
-        </div>
+        </SecondGroup>
       </AddressSectionContent>
     </AddressSection>
   )
