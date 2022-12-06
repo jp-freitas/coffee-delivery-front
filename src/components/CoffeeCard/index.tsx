@@ -1,6 +1,7 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react'
 import {
   Amount,
+  BuyButton,
   BuySection,
   CardContainer,
   CardContent,
@@ -54,9 +55,9 @@ export function CoffeeCard({
               <Plus size={14} weight="bold" />
             </PlusContainer>
           </Count>
-          <button>
-            <ShoppingCart size={20} weight="fill" />
-          </button>
+          <BuyButton>
+            <ShoppingCartSimple size={20} weight="fill" />
+          </BuyButton>
         </BuySection>
       </CardContent>
     </CardContainer>

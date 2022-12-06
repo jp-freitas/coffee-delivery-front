@@ -64,6 +64,8 @@ export const MinusContainer = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: color 0.3s;
   color: ${(props) => props.theme['purple-500']};
   &:hover {
     color: ${(props) => props.theme['purple-900']};
@@ -74,6 +76,8 @@ export const PlusContainer = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: color 0.3s;
   color: ${(props) => props.theme['purple-500']};
 
   &:hover {
@@ -92,7 +96,9 @@ export const RemoveButton = styled.button`
   color: ${(props) => props.theme['gray-700']};
   border: 0;
   border-radius: 0.375rem;
+  cursor: pointer;
   padding: 0.53125rem 0.5rem;
+  transition: background-color 0.3s;
 
   &:hover {
     background: ${(props) => props.theme['gray-500']};

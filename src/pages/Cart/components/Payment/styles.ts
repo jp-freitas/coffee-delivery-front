@@ -9,6 +9,7 @@ export const PaymentMethod = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 10rem;
 `
 
 export const PaymentMethodHeader = styled.div`
@@ -48,29 +49,31 @@ export const PaymentMethodContent = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   gap: 0.75rem;
+`
 
-  button {
-    width: 100%;
-    padding: 0.875rem;
-    border: 0;
-    border-radius: 0.375rem;
-    background: ${(props) => props.theme['gray-400']};
-    color: ${(props) => props.theme['gray-800']};
-    font-size: 0.75rem;
-    line-height: 160%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+export const BasePaymentMethodButton = styled.button`
+  width: 100%;
+  padding: 0.875rem;
+  border: 0;
+  border-radius: 0.375rem;
+  background: ${(props) => props.theme['gray-400']};
+  color: ${(props) => props.theme['gray-800']};
+  font-size: 0.75rem;
+  line-height: 160%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: background-color 0.3s;
 
-    &:hover {
-      background: ${(props) => props.theme['gray-500']};
-    }
+  &:hover {
+    background: ${(props) => props.theme['gray-500']};
+  }
 
-    svg {
-      margin-bottom: 0.1rem;
-      margin-right: 0.5rem;
-      margin-left: 0;
-      color: ${(props) => props.theme['purple-500']};
-    }
+  svg {
+    margin-bottom: 0.1rem;
+    margin-right: 0.5rem;
+    margin-left: 0;
+    color: ${(props) => props.theme['purple-500']};
   }
 `

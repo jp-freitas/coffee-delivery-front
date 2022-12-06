@@ -65,21 +65,23 @@ export const BuySection = styled.div`
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
+`
 
-  > button {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    border: 0;
-    border-radius: 0.375rem;
-    background: ${(props) => props.theme['purple-900']};
-    color: ${(props) => props.theme.white};
+export const BuyButton = styled.button`
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 0.375rem;
+  background: ${(props) => props.theme['purple-900']};
+  color: ${(props) => props.theme.white};
+  cursor: pointer;
+  transition: background-color 0.3s;
 
-    &:hover {
-      background: ${(props) => props.theme['purple-500']};
-    }
+  &:hover {
+    background: ${(props) => props.theme['purple-500']};
   }
 `
 
@@ -121,6 +123,8 @@ export const MinusContainer = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: color 0.3s;
   color: ${(props) => props.theme['purple-500']};
   &:hover {
     color: ${(props) => props.theme['purple-900']};
@@ -131,6 +135,8 @@ export const PlusContainer = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: color 0.3s;
   color: ${(props) => props.theme['purple-500']};
 
   &:hover {

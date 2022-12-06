@@ -1,5 +1,6 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
 import {
+  BasePaymentMethodButton,
   PaymentMethod,
   PaymentMethodContent,
   PaymentMethodHeader,
@@ -19,18 +20,18 @@ export function Payment() {
         </PaymentMethodTitle>
       </PaymentMethodHeader>
       <PaymentMethodContent>
-        <button>
+        <BasePaymentMethodButton>
           <CreditCard size={16} />
           CARTÃO DE CRÉDITO
-        </button>
-        <button>
+        </BasePaymentMethodButton>
+        <BasePaymentMethodButton>
           <Bank size={16} />
           CARTÃO DE DÉBITO
-        </button>
-        <button>
+        </BasePaymentMethodButton>
+        <BasePaymentMethodButton>
           <Money size={16} />
           DINHEIRO
-        </button>
+        </BasePaymentMethodButton>
       </PaymentMethodContent>
     </PaymentMethod>
   )

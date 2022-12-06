@@ -52,6 +52,7 @@ export const Location = styled.span`
 `
 
 export const Cart = styled.span`
+  cursor: pointer;
   margin-right: 0;
   background: ${(props) => props.theme['yellow-100']};
   color: ${(props) => props.theme['yellow-500']};

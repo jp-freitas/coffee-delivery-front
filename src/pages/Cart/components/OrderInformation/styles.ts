@@ -79,4 +79,10 @@ export const ButtonConfirmation = styled.button`
   line-height: 160%;
   font-weight: 700;
   padding: 0.75rem 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background: ${(props) => props.theme['yellow-900']};
+  }
 `
