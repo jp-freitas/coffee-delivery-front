@@ -33,6 +33,10 @@ export const Resume = styled.div`
     margin-right: 0;
     font-size: 1rem;
   }
+
+  a {
+    width: 100%;
+  }
 `
 
 export const Items = styled.div`

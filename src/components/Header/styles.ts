@@ -53,7 +53,22 @@ export const Location = styled.span`
 
 export const Cart = styled.span`
   cursor: pointer;
+  position: relative;
   margin-right: 0;
   background: ${(props) => props.theme['yellow-100']};
   color: ${(props) => props.theme['yellow-500']};
+
+  > span {
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    top: -10px;
+    right: -10px;
+    padding: 0.5rem !important;
+    border-radius: 100% !important;
+    background: ${(props) => props.theme['yellow-900']};
+    color: ${(props) => props.theme.white};
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
 `

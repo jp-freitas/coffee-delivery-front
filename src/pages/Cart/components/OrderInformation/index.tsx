@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import { CoffeeCardCart } from '../../../../components/CoffeeCardCart'
 import {
   ButtonConfirmation,
@@ -29,7 +30,9 @@ export function OrderInformation() {
           <p>Total</p>
           <span>R$ 23,30</span>
         </Total>
-        <ButtonConfirmation>CONFIRMAR PEDIDO</ButtonConfirmation>
+        <NavLink to="/order-confirmation" title="Confirmar Pedido">
+          <ButtonConfirmation>CONFIRMAR PEDIDO</ButtonConfirmation>
+        </NavLink>
       </Resume>
     </Container>
   )
