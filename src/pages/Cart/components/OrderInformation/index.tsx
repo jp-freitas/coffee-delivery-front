@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { CoffeeCardCart } from '../../../../components/CoffeeCardCart'
+import { useCart } from '../../../../hooks/useCart'
 import {
   ButtonConfirmation,
   Container,
@@ -17,10 +18,15 @@ export function OrderInformation() {
   //   return newSumAmount;
   // }, {} as CartItemsAmount)
 
+  const { cart } = useCart()
+  console.log(cart.map((item) => item.id))
+
   return (
     <Container>
       <ItemsList>
-        <CoffeeCardCart />
+        {/* {cartItems.map((item) => {
+          return <CoffeeCardCart key={item.id} />
+        })} */}
       </ItemsList>
       <Resume>
         <Items>

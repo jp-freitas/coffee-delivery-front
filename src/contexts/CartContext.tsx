@@ -25,31 +25,50 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   })
   const [coffees, setCoffees] = useState(Coffees)
 
-  console.log(cart)
+  function resetQuantity(id: string) {
+    const coffee = coffees.map((coffee) =>
+      coffee.id === id
+        ? {
+            ...coffee,
+            quantity: 1,
+          }
+        : coffee,
+    )
+    setCoffees(coffee)
+  }
 
   function addNewProduct(id: string) {
     try {
       const updatedCart = [...Object.entries(cart).map((coffee) => coffee[1])]
       const findCoffeeInCart = updatedCart.find((coffee) => coffee.id === id)
-      const findCoffee = coffees.find((coffee) => coffee.id === id)
-      if (!findCoffeeInCart) {
-        if (!findCoffee) {
-          throw Error('Café não encontrado')
-        } else {
+      const currentQuantity = findCoffeeInCart ? findCoffeeInCart.quantity : 0
+      const newQuantityCoffee = coffees.find((coffee) =>
+        coffee.id === id ? coffee.quantity : coffee,
+      )
+      const newQuantityCart = currentQuantity + newQuantityCoffee!.quantity
+      if (findCoffeeInCart) {
+        findCoffeeInCart.quantity = newQuantityCart
+        resetQuantity(id)
+      } else {
+        const findCoffee = coffees.find((coffee) => coffee.id === id)
+        if (findCoffee) {
           const newItem = {
             ...findCoffee,
           }
           updatedCart.push(newItem)
+          resetQuantity(id)
+        } else {
+          throw Error('Café não encontrado')
         }
-      } else {
-        const updateItemInCart = {
-          ...findCoffeeInCart,
-          quantity: findCoffeeInCart.quantity + findCoffeeInCart.quantity,
-        }
-        updatedCart.push(updateItemInCart)
       }
       setCart(updatedCart)
-    } catch {}
+      localStorage.setItem(
+        '@coffee-delivery:cart-1.0.0',
+        JSON.stringify(updatedCart),
+      )
+    } catch {
+      throw Error('Erro ao adicionar produto')
+    }
   }
 
   function handleIncreaseQuantity(id: string) {
