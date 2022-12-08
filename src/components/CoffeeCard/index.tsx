@@ -1,5 +1,7 @@
 import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react'
+import { Coffee } from '../../data/coffee'
 import { useCart } from '../../hooks/useCart'
+import { formatPrice } from '../../utils/format'
 import {
   Amount,
   BuyButton,
@@ -16,15 +18,6 @@ import {
   TagSection,
   Title,
 } from './styles'
-interface CoffeeCardProps {
-  id: string
-  image: string
-  tags: string[]
-  name: string
-  description: string
-  amount: number
-  quantity: number
-}
 
 export function CoffeeCard({
   id,
@@ -32,12 +25,12 @@ export function CoffeeCard({
   tags,
   name,
   description,
-  amount,
+  price,
   quantity,
-}: CoffeeCardProps) {
-  const { handleDecreaseQuantity, handleIncreaseQuantity, createNewCart } =
+}: Coffee) {
+  const { handleDecreaseQuantity, handleIncreaseQuantity, addNewProduct } =
     useCart()
-
+  const priceFormatted = formatPrice(price).slice(3)
   return (
     <CardContainer>
       <img src={image} alt={`Imagem representativa a ${name}`} />
@@ -52,7 +45,7 @@ export function CoffeeCard({
         <BuySection>
           <Prefix>
             R$
-            <Amount>{amount}</Amount>
+            <Amount>{priceFormatted}</Amount>
           </Prefix>
           <Count>
             <MinusContainer
@@ -71,7 +64,7 @@ export function CoffeeCard({
               <Plus size={14} weight="bold" />
             </PlusContainer>
           </Count>
-          <BuyButton onClick={() => createNewCart(id)}>
+          <BuyButton onClick={() => addNewProduct(id)}>
             <ShoppingCartSimple size={20} weight="fill" />
           </BuyButton>
         </BuySection>

@@ -19,7 +19,7 @@ export function CoffeeList() {
               tags={coffee.tags}
               name={coffee.name}
               description={coffee.description}
-              amount={coffee.amount}
+              price={coffee.price}
             />
           )
         })}

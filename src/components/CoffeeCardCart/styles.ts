@@ -111,7 +111,7 @@ export const RemoveButton = styled.button`
 `
 
 export const Amount = styled.span`
-  margin-left: 0.25rem;
+  width: 20%;
   margin-bottom: 2.8rem;
   font-size: 1rem;
   font-weight: 700;

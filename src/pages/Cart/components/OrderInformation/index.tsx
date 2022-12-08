@@ -11,10 +11,15 @@ import {
 } from './styles'
 
 export function OrderInformation() {
+  // const cartItemsAmount = cart.reduce((sumAmount, product) => {
+  //   const newSumAmount = { ...sumAmount };
+  //   newSumAmount[product.id] = product.amount;
+  //   return newSumAmount;
+  // }, {} as CartItemsAmount)
+
   return (
     <Container>
       <ItemsList>
-        <CoffeeCardCart />
         <CoffeeCardCart />
       </ItemsList>
       <Resume>

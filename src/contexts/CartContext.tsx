@@ -1,22 +1,10 @@
 import { createContext, ReactNode, useState } from 'react'
-import { Coffees } from '../data/coffee'
-
-export type Cart = {
-  items: {
-    id: string
-    image: string
-    name: string
-    quantity: number
-    value: number
-  }
-  // amount: number
-  // delivery: number
-}
+import { Coffee, Coffees } from '../data/coffee'
 
 interface CartContextData {
-  cart: Cart[]
+  cart: Coffee[]
   coffees: typeof Coffees
-  createNewCart: (id: string) => void
+  addNewProduct: (id: string) => void
   handleIncreaseQuantity: (id: string) => void
   handleDecreaseQuantity: (id: string) => void
 }
@@ -28,8 +16,41 @@ interface CartContextProviderProps {
 export const CartContext = createContext<CartContextData>({} as CartContextData)
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cart, setCart] = useState<Cart[]>([] as Cart[])
+  const [cart, setCart] = useState<Coffee[]>(() => {
+    const storagedCart = localStorage.getItem('@coffee-delivery:cart-1.0.0')
+    if (storagedCart) {
+      return JSON.parse(storagedCart)
+    }
+    return { cart: [] }
+  })
   const [coffees, setCoffees] = useState(Coffees)
+
+  console.log(cart)
+
+  function addNewProduct(id: string) {
+    try {
+      const updatedCart = [...Object.entries(cart).map((coffee) => coffee[1])]
+      const findCoffeeInCart = updatedCart.find((coffee) => coffee.id === id)
+      const findCoffee = coffees.find((coffee) => coffee.id === id)
+      if (!findCoffeeInCart) {
+        if (!findCoffee) {
+          throw Error('Café não encontrado')
+        } else {
+          const newItem = {
+            ...findCoffee,
+          }
+          updatedCart.push(newItem)
+        }
+      } else {
+        const updateItemInCart = {
+          ...findCoffeeInCart,
+          quantity: findCoffeeInCart.quantity + findCoffeeInCart.quantity,
+        }
+        updatedCart.push(updateItemInCart)
+      }
+      setCart(updatedCart)
+    } catch {}
+  }
 
   function handleIncreaseQuantity(id: string) {
     const coffee = coffees.map((coffee) =>
@@ -53,22 +74,12 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     setCoffees(coffee)
   }
 
-  function createNewCart(id: string) {
-    const findCoffee = coffees.find((coffee) => coffee.id === id)
-    if (!findCoffee) {
-      return new Error('Café não encontrado')
-    } else {
-      const { id, image, name, amount, quantity } = findCoffee
-    }
-  }
-
-  console.log(cart)
   return (
     <CartContext.Provider
       value={{
         cart,
         coffees,
-        createNewCart,
+        addNewProduct,
         handleIncreaseQuantity,
         handleDecreaseQuantity,
       }}

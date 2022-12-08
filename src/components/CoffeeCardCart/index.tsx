@@ -27,7 +27,7 @@ export function CoffeeCardCart() {
               <MinusContainer>
                 <Minus size={14} weight="bold" />
               </MinusContainer>
-              <Number>1</Number>
+              <Number>2</Number>
               <PlusContainer>
                 <Plus size={14} weight="bold" />
               </PlusContainer>
@@ -39,7 +39,7 @@ export function CoffeeCardCart() {
           </ActionContainer>
         </InfoContent>
       </InfoContainer>
-      <Amount>{`R$ ${parseFloat(String(9.9)).toFixed(2)}`}</Amount>
+      <Amount>{`R$ ${parseFloat(String(19.8)).toFixed(2)}`}</Amount>
     </Container>
   )
 }
