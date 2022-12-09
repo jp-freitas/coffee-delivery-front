@@ -1,5 +1,5 @@
 import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react'
-import { Coffee } from '../../data/coffee'
+import { Coffee } from '../../@types/coffee'
 import { useCart } from '../../hooks/useCart'
 import { formatPrice } from '../../utils/format'
 import {

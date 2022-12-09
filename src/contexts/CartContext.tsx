@@ -1,9 +1,10 @@
-import { createContext, ReactNode, useState } from 'react'
-import { Coffee, Coffees } from '../data/coffee'
+import { createContext, ReactNode, useEffect, useState } from 'react'
+import { Coffee } from '../@types/coffee'
+import { api } from '../services/api'
 
 interface CartContextData {
   cart: Coffee[]
-  coffees: typeof Coffees
+  coffees: Coffee[]
   addNewProduct: (id: string) => void
   handleIncreaseQuantity: (id: string) => void
   handleDecreaseQuantity: (id: string) => void
@@ -21,9 +22,20 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     if (storagedCart) {
       return JSON.parse(storagedCart)
     }
-    return { cart: [] }
+    return []
   })
-  const [coffees, setCoffees] = useState(Coffees)
+  const [coffees, setCoffees] = useState<Coffee[]>([])
+
+  console.log(cart)
+
+  useEffect(() => {
+    async function loadCoffees() {
+      const response = await api.get<Coffee[]>('coffees')
+      const coffees = response.data.map((coffee) => coffee)
+      setCoffees(coffees)
+    }
+    loadCoffees()
+  }, [])
 
   function resetQuantity(id: string) {
     const coffee = coffees.map((coffee) =>
@@ -39,7 +51,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
   function addNewProduct(id: string) {
     try {
-      const updatedCart = [...Object.entries(cart).map((coffee) => coffee[1])]
+      const updatedCart = [...cart]
       const findCoffeeInCart = updatedCart.find((coffee) => coffee.id === id)
       const currentQuantity = findCoffeeInCart ? findCoffeeInCart.quantity : 0
       const newQuantityCoffee = coffees.find((coffee) =>

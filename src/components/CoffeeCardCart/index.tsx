@@ -1,4 +1,6 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
+import { useCart } from '../../hooks/useCart'
+import { formatPrice } from '../../utils/format'
 import {
   ActionContainer,
   Amount,
@@ -13,22 +15,36 @@ import {
   RemoveButton,
 } from './styles'
 
-import express from '../../assets/coffee-express.svg'
+interface CoffeeCardCartProps {
+  id: string
+  image: string
+  name: string
+  quantity: number
+  price: number
+}
 
-export function CoffeeCardCart() {
+export function CoffeeCardCart({
+  id,
+  image,
+  name,
+  quantity,
+  price,
+}: CoffeeCardCartProps) {
+  const { handleIncreaseQuantity, handleDecreaseQuantity } = useCart()
+  const priceFormatted = formatPrice(price * quantity).slice(3)
   return (
     <Container>
       <InfoContainer>
-        <img src={express} alt="" />
+        <img src={image} alt={`Imagem representativa de ${name}`} />
         <InfoContent>
-          <Name>Expresso Tradicional</Name>
+          <Name>{name}</Name>
           <ActionContainer>
             <Count>
-              <MinusContainer>
+              <MinusContainer onClick={() => handleDecreaseQuantity(id)}>
                 <Minus size={14} weight="bold" />
               </MinusContainer>
-              <Number>2</Number>
-              <PlusContainer>
+              <Number>{quantity}</Number>
+              <PlusContainer onClick={() => handleIncreaseQuantity(id)}>
                 <Plus size={14} weight="bold" />
               </PlusContainer>
             </Count>
@@ -39,7 +55,7 @@ export function CoffeeCardCart() {
           </ActionContainer>
         </InfoContent>
       </InfoContainer>
-      <Amount>{`R$ ${parseFloat(String(19.8)).toFixed(2)}`}</Amount>
+      <Amount>{`R$ ${priceFormatted}`}</Amount>
     </Container>
   )
 }

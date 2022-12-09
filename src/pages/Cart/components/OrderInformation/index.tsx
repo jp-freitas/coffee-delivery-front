@@ -12,21 +12,29 @@ import {
 } from './styles'
 
 export function OrderInformation() {
+  const { cart } = useCart()
+
   // const cartItemsAmount = cart.reduce((sumAmount, product) => {
   //   const newSumAmount = { ...sumAmount };
   //   newSumAmount[product.id] = product.amount;
   //   return newSumAmount;
   // }, {} as CartItemsAmount)
 
-  const { cart } = useCart()
-  console.log(cart.map((item) => item.id))
-
   return (
     <Container>
       <ItemsList>
-        {/* {cartItems.map((item) => {
-          return <CoffeeCardCart key={item.id} />
-        })} */}
+        {cart.map((item) => {
+          return (
+            <CoffeeCardCart
+              key={item.id}
+              id={item.id}
+              image={item.image}
+              name={item.name}
+              quantity={item.quantity}
+              price={item.price}
+            />
+          )
+        })}
       </ItemsList>
       <Resume>
         <Items>
