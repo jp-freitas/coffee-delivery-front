@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { CoffeeCardCart } from '../../../../components/CoffeeCardCart'
 import { useCart } from '../../../../hooks/useCart'
+import { formatPrice } from '../../../../utils/format'
 import {
   ButtonConfirmation,
   Container,
@@ -12,13 +13,7 @@ import {
 } from './styles'
 
 export function OrderInformation() {
-  const { cart } = useCart()
-
-  // const cartItemsAmount = cart.reduce((sumAmount, product) => {
-  //   const newSumAmount = { ...sumAmount };
-  //   newSumAmount[product.id] = product.amount;
-  //   return newSumAmount;
-  // }, {} as CartItemsAmount)
+  const { cart, cartSubTotal, delivery, total } = useCart()
 
   return (
     <Container>
@@ -39,15 +34,15 @@ export function OrderInformation() {
       <Resume>
         <Items>
           <p>Total de itens</p>
-          <span>R$ 19,80</span>
+          <span>{formatPrice(cartSubTotal)}</span>
         </Items>
         <Delivery>
           <p>Entrega</p>
-          <span>R$ 3,50</span>
+          <span>{formatPrice(delivery)}</span>
         </Delivery>
         <Total>
           <p>Total</p>
-          <span>R$ 23,30</span>
+          <span>{formatPrice(total)}</span>
         </Total>
         <NavLink to="/order-confirmation" title="Confirmar Pedido">
           <ButtonConfirmation>CONFIRMAR PEDIDO</ButtonConfirmation>

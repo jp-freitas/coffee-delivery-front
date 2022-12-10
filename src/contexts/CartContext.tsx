@@ -1,13 +1,21 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import { createContext, ReactNode, useState } from 'react'
 import { Coffee } from '../@types/coffee'
-import { api } from '../services/api'
+
+import { useCoffee } from '../hooks/useCoffee'
 
 interface CartContextData {
   cart: Coffee[]
-  coffees: Coffee[]
+  cartSubTotal: number
+  delivery: number
+  total: number
   addNewProduct: (id: string) => void
-  handleIncreaseQuantity: (id: string) => void
-  handleDecreaseQuantity: (id: string) => void
+  handleIncreaseQuantityInCart: (id: string) => void
+  handleDecreaseQuantityInCart: (id: string) => void
+  handleRemoveItemFromCart: (id: string) => void
+}
+
+interface CartItemsAmount {
+  [key: string]: number
 }
 
 interface CartContextProviderProps {
@@ -17,6 +25,7 @@ interface CartContextProviderProps {
 export const CartContext = createContext<CartContextData>({} as CartContextData)
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
+  const { coffees, resetQuantity } = useCoffee()
   const [cart, setCart] = useState<Coffee[]>(() => {
     const storagedCart = localStorage.getItem('@coffee-delivery:cart-1.0.0')
     if (storagedCart) {
@@ -24,30 +33,18 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
     return []
   })
-  const [coffees, setCoffees] = useState<Coffee[]>([])
-
-  console.log(cart)
-
-  useEffect(() => {
-    async function loadCoffees() {
-      const response = await api.get<Coffee[]>('coffees')
-      const coffees = response.data.map((coffee) => coffee)
-      setCoffees(coffees)
-    }
-    loadCoffees()
-  }, [])
-
-  function resetQuantity(id: string) {
-    const coffee = coffees.map((coffee) =>
-      coffee.id === id
-        ? {
-            ...coffee,
-            quantity: 1,
-          }
-        : coffee,
-    )
-    setCoffees(coffee)
-  }
+  const initialSubTotal = 0
+  const cartItemsAmount = cart.reduce((sumAmount, product) => {
+    const newSumAmount = { ...sumAmount }
+    newSumAmount[product.id] = product.price * product.quantity
+    return newSumAmount
+  }, {} as CartItemsAmount)
+  const cartSubTotal = cart.reduce(
+    (subTotal, item) => subTotal + cartItemsAmount[item.id],
+    initialSubTotal,
+  )
+  const delivery = 3.5
+  const total = cartSubTotal + delivery
 
   function addNewProduct(id: string) {
     try {
@@ -83,36 +80,58 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
   }
 
-  function handleIncreaseQuantity(id: string) {
-    const coffee = coffees.map((coffee) =>
-      coffee.id === id
-        ? coffee.quantity >= 10
-          ? coffee
-          : { ...coffee, quantity: coffee.quantity + 1 }
-        : coffee,
+  function handleRemoveItemFromCart(id: string) {
+    const cartItems = cart.filter((item) => item.id !== id)
+    setCart(cartItems)
+    localStorage.setItem(
+      '@coffee-delivery:cart-1.0.0',
+      JSON.stringify(cartItems),
     )
-    setCoffees(coffee)
   }
 
-  function handleDecreaseQuantity(id: string) {
-    const coffee = coffees.map((coffee) =>
-      coffee.id === id
-        ? coffee.quantity <= 1
-          ? coffee
-          : { ...coffee, quantity: coffee.quantity - 1 }
-        : coffee,
+  function handleIncreaseQuantityInCart(id: string) {
+    const cartItems = cart.map((item) =>
+      item.id === id
+        ? {
+            ...item,
+            quantity: item.quantity < 10 ? item.quantity + 1 : item.quantity,
+          }
+        : item,
     )
-    setCoffees(coffee)
+    setCart(cartItems)
+    localStorage.setItem(
+      '@coffee-delivery:cart-1.0.0',
+      JSON.stringify(cartItems),
+    )
+  }
+
+  function handleDecreaseQuantityInCart(id: string) {
+    const cartItems = cart.map((item) =>
+      item.id === id
+        ? {
+            ...item,
+            quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity,
+          }
+        : item,
+    )
+    setCart(cartItems)
+    localStorage.setItem(
+      '@coffee-delivery:cart-1.0.0',
+      JSON.stringify(cartItems),
+    )
   }
 
   return (
     <CartContext.Provider
       value={{
         cart,
-        coffees,
+        cartSubTotal,
+        delivery,
+        total,
         addNewProduct,
-        handleIncreaseQuantity,
-        handleDecreaseQuantity,
+        handleIncreaseQuantityInCart,
+        handleDecreaseQuantityInCart,
+        handleRemoveItemFromCart,
       }}
     >
       {children}

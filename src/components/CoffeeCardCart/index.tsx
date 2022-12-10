@@ -30,7 +30,11 @@ export function CoffeeCardCart({
   quantity,
   price,
 }: CoffeeCardCartProps) {
-  const { handleIncreaseQuantity, handleDecreaseQuantity } = useCart()
+  const {
+    handleIncreaseQuantityInCart,
+    handleDecreaseQuantityInCart,
+    handleRemoveItemFromCart,
+  } = useCart()
   const priceFormatted = formatPrice(price * quantity).slice(3)
   return (
     <Container>
@@ -40,15 +44,15 @@ export function CoffeeCardCart({
           <Name>{name}</Name>
           <ActionContainer>
             <Count>
-              <MinusContainer onClick={() => handleDecreaseQuantity(id)}>
+              <MinusContainer onClick={() => handleDecreaseQuantityInCart(id)}>
                 <Minus size={14} weight="bold" />
               </MinusContainer>
               <Number>{quantity}</Number>
-              <PlusContainer onClick={() => handleIncreaseQuantity(id)}>
+              <PlusContainer onClick={() => handleIncreaseQuantityInCart(id)}>
                 <Plus size={14} weight="bold" />
               </PlusContainer>
             </Count>
-            <RemoveButton>
+            <RemoveButton onClick={() => handleRemoveItemFromCart(id)}>
               <Trash size={16} />
               REMOVER
             </RemoveButton>

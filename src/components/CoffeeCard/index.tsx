@@ -1,6 +1,7 @@
 import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react'
 import { Coffee } from '../../@types/coffee'
 import { useCart } from '../../hooks/useCart'
+import { useCoffee } from '../../hooks/useCoffee'
 import { formatPrice } from '../../utils/format'
 import {
   Amount,
@@ -28,8 +29,8 @@ export function CoffeeCard({
   price,
   quantity,
 }: Coffee) {
-  const { handleDecreaseQuantity, handleIncreaseQuantity, addNewProduct } =
-    useCart()
+  const { addNewProduct } = useCart()
+  const { handleDecreaseQuantity, handleIncreaseQuantity } = useCoffee()
   const priceFormatted = formatPrice(price).slice(3)
   return (
     <CardContainer>

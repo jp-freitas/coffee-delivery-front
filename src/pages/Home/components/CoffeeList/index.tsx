@@ -1,9 +1,9 @@
 import { CoffeeCard } from '../../../../components/CoffeeCard'
-import { useCart } from '../../../../hooks/useCart'
+import { useCoffee } from '../../../../hooks/useCoffee'
 import { CardList, Container, Title } from './styles'
 
 export function CoffeeList() {
-  const { coffees } = useCart()
+  const { coffees } = useCoffee()
 
   return (
     <Container>
