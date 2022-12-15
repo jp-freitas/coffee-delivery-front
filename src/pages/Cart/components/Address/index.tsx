@@ -33,7 +33,7 @@ export function Address() {
       setCityInput(response.data.city)
       setNeighborhoodInput(response.data.neighborhood)
       setStreetInput(response.data.street)
-    }, 1000)
+    }, 2000)
   }
 
   return (
@@ -62,6 +62,7 @@ export function Address() {
           type="text"
           placeholder="Rua"
           value={streetInput || ''}
+          onChange={(event) => setStreetInput(event.target.value)}
         />
         <FirstGroup>
           <input
@@ -87,14 +88,22 @@ export function Address() {
             type="text"
             placeholder="Bairro"
             value={neighborhoodInput}
+            onChange={(event) => setNeighborhoodInput(event.target.value)}
           />
           <input
             name="city"
             type="text"
             placeholder="Cidade"
             value={cityInput}
+            onChange={(event) => setCityInput(event.target.value)}
           />
-          <input name="state" type="text" placeholder="UF" value={stateInput} />
+          <input
+            name="state"
+            type="text"
+            placeholder="UF"
+            value={stateInput}
+            onChange={(event) => setStateInput(event.target.value)}
+          />
         </SecondGroup>
       </AddressSectionContent>
     </AddressSection>
