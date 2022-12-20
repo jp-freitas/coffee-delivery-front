@@ -1,15 +1,32 @@
 import { MapPinLine } from 'phosphor-react'
-import { ChangeEvent, useState } from 'react'
-import { Input } from '../../../../components/Input'
+import {
+  ChangeEvent,
+  createRef,
+  forwardRef,
+  InputHTMLAttributes,
+  useState,
+} from 'react'
 import { cep } from '../../../../services/cep'
 import {
   AddressSection,
   AddressSectionContent,
   AddressSectionHeader,
   AddressSectionTitle,
+  Container,
   FirstGroup,
   SecondGroup,
 } from './styles'
+
+type InputProps = InputHTMLAttributes<HTMLInputElement>
+
+// eslint-disable-next-line react/display-name
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  return (
+    <Container>
+      <input {...props} ref={ref} />
+    </Container>
+  )
+})
 
 export function Address() {
   const [cepInput, setCepInput] = useState('')
@@ -19,6 +36,7 @@ export function Address() {
   const [stateInput, setStateInput] = useState('')
   const [complementInput, setComplementInput] = useState('')
   const [numberInput, setNumberInput] = useState('')
+  const numberRef = createRef<HTMLInputElement>()
 
   async function validateCEP(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.value) return
@@ -34,7 +52,9 @@ export function Address() {
       setCityInput(response.data.city)
       setNeighborhoodInput(response.data.neighborhood)
       setStreetInput(response.data.street)
-    }, 1000)
+    }, 500)
+
+    numberRef.current?.focus()
   }
 
   return (
@@ -48,6 +68,7 @@ export function Address() {
       </AddressSectionHeader>
       <AddressSectionContent>
         <Input
+          required
           name="cep"
           type="text"
           placeholder="CEP"
@@ -59,6 +80,7 @@ export function Address() {
           onBlur={validateCEP}
         />
         <Input
+          required
           name="street"
           type="text"
           placeholder="Rua"
@@ -67,6 +89,7 @@ export function Address() {
         />
         <FirstGroup>
           <Input
+            required
             name="number"
             type="text"
             pattern="[0-9]*"
@@ -74,18 +97,20 @@ export function Address() {
             placeholder="Número"
             value={numberInput}
             onChange={(event) => setNumberInput(event.target.value)}
+            ref={numberRef}
           />
           <Input
             name="complement"
             type="text"
             placeholder="Complemento"
-            optionalText="Opcional"
+            // optionalText="Opcional"
             value={complementInput}
             onChange={(event) => setComplementInput(event.target.value)}
           />
         </FirstGroup>
         <SecondGroup>
           <Input
+            required
             name="neighborhood"
             type="text"
             placeholder="Bairro"
@@ -93,6 +118,7 @@ export function Address() {
             onChange={(event) => setNeighborhoodInput(event.target.value)}
           />
           <Input
+            required
             name="city"
             type="text"
             placeholder="Cidade"
@@ -100,6 +126,7 @@ export function Address() {
             onChange={(event) => setCityInput(event.target.value)}
           />
           <Input
+            required
             name="state"
             type="text"
             placeholder="UF"
