@@ -51,12 +51,20 @@ export const PaymentMethodContent = styled.div`
   gap: 0.75rem;
 `
 
-export const BasePaymentMethodButton = styled.button`
+interface BasePaymentMethodButtonProps {
+  isActive: boolean
+}
+
+export const BasePaymentMethodButton = styled.button<BasePaymentMethodButtonProps>`
   width: 100%;
   padding: 0.875rem;
-  border: 0;
+  border-width: 0.0625rem;
+  border-style: solid;
+  border-color: ${(props) =>
+    props.isActive ? props.theme['purple-500'] : 'transparent'};
   border-radius: 0.375rem;
-  background: ${(props) => props.theme['gray-400']};
+  background: ${(props) =>
+    props.isActive ? props.theme['purple-100'] : props.theme['gray-400']};
   color: ${(props) => props.theme['gray-800']};
   font-size: 0.75rem;
   line-height: 160%;
@@ -68,6 +76,10 @@ export const BasePaymentMethodButton = styled.button`
 
   &:hover {
     background: ${(props) => props.theme['gray-500']};
+  }
+
+  &:focus {
+    box-shadow: none !important;
   }
 
   svg {

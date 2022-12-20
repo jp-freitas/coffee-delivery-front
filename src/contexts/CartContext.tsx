@@ -43,7 +43,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     (subTotal, item) => subTotal + cartItemsAmount[item.id],
     initialSubTotal,
   )
-  const delivery = 3.5
+  const delivery = cart.length === 0 ? 0 : 3.5
   const total = cartSubTotal + delivery
 
   function addNewProduct(id: string) {
@@ -93,9 +93,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     const cartItems = cart.map((item) =>
       item.id === id
         ? {
-            ...item,
-            quantity: item.quantity < 10 ? item.quantity + 1 : item.quantity,
-          }
+          ...item,
+          quantity: item.quantity < 10 ? item.quantity + 1 : item.quantity,
+        }
         : item,
     )
     setCart(cartItems)
@@ -109,9 +109,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     const cartItems = cart.map((item) =>
       item.id === id
         ? {
-            ...item,
-            quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity,
-          }
+          ...item,
+          quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity,
+        }
         : item,
     )
     setCart(cartItems)

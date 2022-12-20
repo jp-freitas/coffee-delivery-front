@@ -39,5 +39,3 @@ export const OrderInformationContainer = styled.section`
     margin-bottom: 0.973rem;
   }
 `
-
-export const OrderInformationContent = styled.section``
