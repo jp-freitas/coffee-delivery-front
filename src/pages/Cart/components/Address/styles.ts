@@ -40,6 +40,7 @@ export const AddressSectionTitle = styled.div`
 `
 
 export const AddressSectionContent = styled.form`
+  width: 100%;
   margin-top: 2rem;
   display: flex;
   align-items: center;
@@ -47,21 +48,8 @@ export const AddressSectionContent = styled.form`
   flex-direction: column;
   gap: 1rem;
 
-  input {
-    margin-left: 0;
-    padding: 0.75rem;
-    background: ${(props) => props.theme['gray-300']};
-    color: ${(props) => props.theme['gray-800']};
-    border: 1px solid ${(props) => props.theme['gray-400']};
-    border-radius: 0.25rem;
-
-    &::placeholder {
-      color: ${(props) => props.theme['gray-600']};
-    }
-
-    :nth-child(2) {
-      width: 100%;
-    }
+  > :nth-child(1) {
+    width: 34%;
   }
 `
 
@@ -73,8 +61,12 @@ export const FirstGroup = styled.div`
   justify-content: center;
   gap: 0.75rem;
 
+  > :nth-child(1) {
+    width: 35%;
+  }
+
   > :nth-child(2) {
-    width: 100%;
+    width: 67%;
   }
 `
 
@@ -86,10 +78,15 @@ export const SecondGroup = styled.div`
   justify-content: center;
   gap: 0.75rem;
 
-  > :nth-child(2) {
-    width: 70%;
+  > :nth-child(1) {
+    width: 35%;
   }
+
+  > :nth-child(2) {
+    width: 55%;
+  }
+
   > :nth-child(3) {
-    width: 15%;
+    width: 10%;
   }
 `

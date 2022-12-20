@@ -1,5 +1,6 @@
 import { MapPinLine } from 'phosphor-react'
 import { ChangeEvent, useState } from 'react'
+import { Input } from '../../../../components/Input'
 import { cep } from '../../../../services/cep'
 import {
   AddressSection,
@@ -17,7 +18,7 @@ export function Address() {
   const [cityInput, setCityInput] = useState('')
   const [stateInput, setStateInput] = useState('')
   const [complementInput, setComplementInput] = useState('')
-  const [numberInput, setNumberInput] = useState(0)
+  const [numberInput, setNumberInput] = useState('')
 
   async function validateCEP(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.value) return
@@ -33,7 +34,7 @@ export function Address() {
       setCityInput(response.data.city)
       setNeighborhoodInput(response.data.neighborhood)
       setStreetInput(response.data.street)
-    }, 2000)
+    }, 1000)
   }
 
   return (
@@ -46,7 +47,7 @@ export function Address() {
         </AddressSectionTitle>
       </AddressSectionHeader>
       <AddressSectionContent>
-        <input
+        <Input
           name="cep"
           type="text"
           placeholder="CEP"
@@ -57,7 +58,7 @@ export function Address() {
           onChange={(event) => setCepInput(event.target.value)}
           onBlur={validateCEP}
         />
-        <input
+        <Input
           name="street"
           type="text"
           placeholder="Rua"
@@ -65,39 +66,40 @@ export function Address() {
           onChange={(event) => setStreetInput(event.target.value)}
         />
         <FirstGroup>
-          <input
+          <Input
             name="number"
-            type="number"
+            type="text"
             pattern="[0-9]*"
             inputMode="numeric"
             placeholder="Número"
             value={numberInput}
-            onChange={(event) => setNumberInput(Number(event.target.value))}
+            onChange={(event) => setNumberInput(event.target.value)}
           />
-          <input
+          <Input
             name="complement"
             type="text"
-            placeholder="Complemento *Optional"
+            placeholder="Complemento"
+            optionalText="Opcional"
             value={complementInput}
             onChange={(event) => setComplementInput(event.target.value)}
           />
         </FirstGroup>
         <SecondGroup>
-          <input
+          <Input
             name="neighborhood"
             type="text"
             placeholder="Bairro"
             value={neighborhoodInput}
             onChange={(event) => setNeighborhoodInput(event.target.value)}
           />
-          <input
+          <Input
             name="city"
             type="text"
             placeholder="Cidade"
             value={cityInput}
             onChange={(event) => setCityInput(event.target.value)}
           />
-          <input
+          <Input
             name="state"
             type="text"
             placeholder="UF"
