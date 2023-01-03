@@ -65,7 +65,10 @@ export function CoffeeCard({
               <Plus size={14} weight="bold" />
             </PlusContainer>
           </Count>
-          <BuyButton onClick={() => addNewProduct(id)}>
+          <BuyButton
+            onClick={() => addNewProduct(id)}
+            title="Adicionar ao Carrinho"
+          >
             <ShoppingCartSimple size={20} weight="fill" />
           </BuyButton>
         </BuySection>
