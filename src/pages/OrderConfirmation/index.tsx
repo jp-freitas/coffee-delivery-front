@@ -13,8 +13,6 @@ import {
 export function OrderConfirmation() {
   const { address } = useAddress()
 
-  console.log(address)
-
   return (
     <Container>
       <Header>
