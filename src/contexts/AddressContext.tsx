@@ -1,8 +1,15 @@
-import { createContext, ReactNode, useState } from 'react'
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from 'react'
 import { Address } from '../@types/address'
 
 interface AddressContextData {
-  address: Address | undefined
+  address: Address
+  setAddress: Dispatch<SetStateAction<Address>>
 }
 
 interface AddressContextProviderProps {
@@ -27,7 +34,7 @@ export function AddressContextProvider({
   })
 
   return (
-    <AddressContext.Provider value={{ address }}>
+    <AddressContext.Provider value={{ address, setAddress }}>
       {children}
     </AddressContext.Provider>
   )
