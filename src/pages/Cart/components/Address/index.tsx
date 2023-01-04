@@ -1,11 +1,6 @@
 import { MapPinLine } from 'phosphor-react'
-import {
-  ChangeEvent,
-  createRef,
-  forwardRef,
-  InputHTMLAttributes,
-  useState,
-} from 'react'
+import { ChangeEvent, createRef, forwardRef, InputHTMLAttributes } from 'react'
+import { useAddress } from '../../../../hooks/useAddress'
 import { cep } from '../../../../services/cep'
 import {
   AddressSection,
@@ -29,31 +24,34 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 })
 
 export function Address() {
-  const [cepInput, setCepInput] = useState('')
-  const [streetInput, setStreetInput] = useState('')
-  const [neighborhoodInput, setNeighborhoodInput] = useState('')
-  const [cityInput, setCityInput] = useState('')
-  const [stateInput, setStateInput] = useState('')
-  const [complementInput, setComplementInput] = useState('')
-  const [numberInput, setNumberInput] = useState('')
+  const { address, setAddress } = useAddress()
   const numberRef = createRef<HTMLInputElement>()
 
-  async function validateCEP(event: ChangeEvent<HTMLInputElement>) {
-    if (!event.target.value) return
-    const response = await cep.get(`/${cepInput}`)
-    setStreetInput('...')
-    setNeighborhoodInput('...')
-    setCityInput('...')
-    setStateInput('...')
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+    setAddress((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }))
+  }
 
+  async function validateCEP() {
+    const response = await cep.get(`/${address.cep}`)
+    setAddress((prevState) => ({
+      ...prevState,
+      street: '...',
+      neighborhood: '...',
+      city: '...',
+      state: '...',
+    }))
     setTimeout(() => {
-      setCepInput(response.data.cep)
-      setStateInput(response.data.state)
-      setCityInput(response.data.city)
-      setNeighborhoodInput(response.data.neighborhood)
-      setStreetInput(response.data.street)
-    }, 500)
-
+      setAddress((prevState) => ({
+        ...prevState,
+        state: response.data.state,
+        city: response.data.city,
+        neighborhood: response.data.neighborhood,
+        street: response.data.street,
+      }))
+    }, 1000)
     numberRef.current?.focus()
   }
 
@@ -75,8 +73,8 @@ export function Address() {
           pattern="[0-9]*"
           inputMode="numeric"
           maxLength={8}
-          value={cepInput}
-          onChange={(event) => setCepInput(event.target.value)}
+          value={address.cep}
+          onChange={handleInputChange}
           onBlur={validateCEP}
         />
         <Input
@@ -84,8 +82,8 @@ export function Address() {
           name="street"
           type="text"
           placeholder="Rua"
-          value={streetInput || ''}
-          onChange={(event) => setStreetInput(event.target.value)}
+          value={address.street}
+          onChange={handleInputChange}
         />
         <FirstGroup>
           <Input
@@ -95,17 +93,16 @@ export function Address() {
             pattern="[0-9]*"
             inputMode="numeric"
             placeholder="Número"
-            value={numberInput}
-            onChange={(event) => setNumberInput(event.target.value)}
+            value={address.number}
+            onChange={handleInputChange}
             ref={numberRef}
           />
           <Input
             name="complement"
             type="text"
             placeholder="Complemento"
-            // optionalText="Opcional"
-            value={complementInput}
-            onChange={(event) => setComplementInput(event.target.value)}
+            value={address.complement}
+            onChange={handleInputChange}
           />
         </FirstGroup>
         <SecondGroup>
@@ -114,24 +111,24 @@ export function Address() {
             name="neighborhood"
             type="text"
             placeholder="Bairro"
-            value={neighborhoodInput}
-            onChange={(event) => setNeighborhoodInput(event.target.value)}
+            value={address.neighborhood}
+            onChange={handleInputChange}
           />
           <Input
             required
             name="city"
             type="text"
             placeholder="Cidade"
-            value={cityInput}
-            onChange={(event) => setCityInput(event.target.value)}
+            value={address.city}
+            onChange={handleInputChange}
           />
           <Input
             required
             name="state"
             type="text"
             placeholder="UF"
-            value={stateInput}
-            onChange={(event) => setStateInput(event.target.value)}
+            value={address.state}
+            onChange={handleInputChange}
           />
         </SecondGroup>
       </AddressSectionContent>

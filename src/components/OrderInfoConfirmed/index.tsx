@@ -1,4 +1,5 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useAddress } from '../../hooks/useAddress'
 import {
   AddressInformation,
   DeliveryInformation,
@@ -7,14 +8,16 @@ import {
 } from './styles'
 
 export function OrderInfoConfirmed() {
+  const { address } = useAddress()
+
   return (
     <InfoSection>
       <AddressInformation>
         <MapPin size={16} weight="fill" />
         <p>
-          Entrega em <span>Rua São José, 59</span>
+          Entrega em <span>{`${address.street}, ${address.number}`}</span>
           <br />
-          Jardim Liberdade - Itumbiara, GO
+          {`${address.neighborhood} - ${address.city}, ${address.state}`}
         </p>
       </AddressInformation>
       <DeliveryInformation>
