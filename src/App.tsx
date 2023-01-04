@@ -7,6 +7,7 @@ import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
 import { CartContextProvider } from './contexts/CartContext'
 import { CoffeeContextProvider } from './contexts/CoffeeContext'
+import { AddressContextProvider } from './contexts/AddressContext'
 
 export function App() {
   return (
@@ -14,7 +15,9 @@ export function App() {
       <BrowserRouter>
         <CoffeeContextProvider>
           <CartContextProvider>
-            <Router />
+            <AddressContextProvider>
+              <Router />
+            </AddressContextProvider>
           </CartContextProvider>
         </CoffeeContextProvider>
       </BrowserRouter>

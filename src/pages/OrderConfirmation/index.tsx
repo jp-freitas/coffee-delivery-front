@@ -1,5 +1,6 @@
 import imgOrderDelivery from '../../assets/delivery-order.svg'
 import { OrderInfoConfirmed } from '../../components/OrderInfoConfirmed'
+import { useAddress } from '../../hooks/useAddress'
 import {
   Container,
   Content,
@@ -10,6 +11,10 @@ import {
 } from './styles'
 
 export function OrderConfirmation() {
+  const { address } = useAddress()
+
+  console.log(address)
+
   return (
     <Container>
       <Header>

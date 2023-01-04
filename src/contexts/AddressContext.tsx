@@ -16,20 +16,18 @@ export const AddressContext = createContext<AddressContextData>(
 export function AddressContextProvider({
   children,
 }: AddressContextProviderProps) {
-  const [address, setAddress] = useState<Address>()
-
-  setAddress({
-    cep: '75533250',
-    street: 'Rua Sumaré',
-    neighborhood: 'Setor Planalto',
-    city: 'Itumbiara',
-    state: 'Goiás',
+  const [address, setAddress] = useState<Address>({
+    cep: '',
+    street: '',
+    neighborhood: '',
+    city: '',
+    state: '',
     complement: '',
-    number: '819',
+    number: '',
   })
 
   return (
-    <AddressContext.Provider value={address}>
+    <AddressContext.Provider value={{ address }}>
       {children}
     </AddressContext.Provider>
   )
