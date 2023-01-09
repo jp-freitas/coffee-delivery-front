@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
-import { Coffee } from '../@types/coffee'
-import { api } from '../services/api'
+import { Coffee } from '@/@types/coffee'
+import { api } from '@/services/api'
 
 interface CoffeeContextProps {
   coffees: Coffee[]

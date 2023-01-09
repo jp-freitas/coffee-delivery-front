@@ -1,7 +1,7 @@
 import { MapPinLine } from 'phosphor-react'
 import { ChangeEvent, createRef, forwardRef, InputHTMLAttributes } from 'react'
-import { useAddress } from '../../../../hooks/useAddress'
-import { cep } from '../../../../services/cep'
+import { useCart } from '@/hooks/useCart'
+import { cep } from '@/services/cep'
 import {
   AddressSection,
   AddressSectionContent,
@@ -24,7 +24,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 })
 
 export function Address() {
-  const { address, setAddress } = useAddress()
+  const { address, setAddress } = useCart()
   const numberRef = createRef<HTMLInputElement>()
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {

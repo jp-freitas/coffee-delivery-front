@@ -1,6 +1,6 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
-import { useCart } from '../../hooks/useCart'
-import { formatPrice } from '../../utils/format'
+import { useCart } from '@/hooks/useCart'
+import { formatPrice } from '@/utils/format'
 import {
   ActionContainer,
   Amount,

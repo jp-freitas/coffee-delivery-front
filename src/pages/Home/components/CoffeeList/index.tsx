@@ -1,5 +1,5 @@
-import { CoffeeCard } from '../../../../components/CoffeeCard'
-import { useCoffee } from '../../../../hooks/useCoffee'
+import { CoffeeCard } from '@/components/CoffeeCard'
+import { useCoffee } from '@/hooks/useCoffee'
 import { CardList, Container, Title } from './styles'
 
 export function CoffeeList() {

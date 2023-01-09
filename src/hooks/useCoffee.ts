@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { CoffeeContext } from '../contexts/CoffeeContext'
+import { CoffeeContext } from '@/contexts/CoffeeContext'
 
 export function useCoffee() {
   const value = useContext(CoffeeContext)

@@ -1,5 +1,5 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
-import { useAddress } from '../../hooks/useAddress'
+import { useCart } from '../../hooks/useCart'
 import {
   AddressInformation,
   DeliveryInformation,
@@ -8,7 +8,7 @@ import {
 } from './styles'
 
 export function OrderInfoConfirmed() {
-  const { address } = useAddress()
+  const { address, paymentMethod } = useCart()
 
   return (
     <InfoSection>
@@ -33,7 +33,7 @@ export function OrderInfoConfirmed() {
         <p>
           Pagamento na entrega
           <br />
-          <span>Cartão de Crédito</span>
+          <span>{paymentMethod}</span>
         </p>
       </PaymentInformation>
     </InfoSection>

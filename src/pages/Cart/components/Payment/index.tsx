@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
-import { useState } from 'react'
+import { useCart } from '@/hooks/useCart'
 import {
   BasePaymentMethodButton,
   PaymentMethod,
@@ -8,8 +9,18 @@ import {
   PaymentMethodTitle,
 } from './styles'
 
+enum PaymentEnum {
+  credit = 'Crédito',
+  debit = 'Débito',
+  money = 'Dinheiro',
+}
+
 export function Payment() {
-  const [paymentType, setPaymentType] = useState('')
+  const { paymentMethod, setPaymentMethod } = useCart()
+
+  function handlePaymentMethod(type: string) {
+    type === paymentMethod ? setPaymentMethod('') : setPaymentMethod(type)
+  }
 
   return (
     <PaymentMethod>
@@ -24,22 +35,22 @@ export function Payment() {
       </PaymentMethodHeader>
       <PaymentMethodContent>
         <BasePaymentMethodButton
-          isActive={paymentType === 'credit'}
-          onClick={() => setPaymentType('credit')}
+          isActive={paymentMethod === PaymentEnum.credit}
+          onClick={() => handlePaymentMethod(PaymentEnum.credit)}
         >
           <CreditCard size={16} />
           CARTÃO DE CRÉDITO
         </BasePaymentMethodButton>
         <BasePaymentMethodButton
-          isActive={paymentType === 'debit'}
-          onClick={() => setPaymentType('debit')}
+          isActive={paymentMethod === PaymentEnum.debit}
+          onClick={() => handlePaymentMethod(PaymentEnum.debit)}
         >
           <Bank size={16} />
           CARTÃO DE DÉBITO
         </BasePaymentMethodButton>
         <BasePaymentMethodButton
-          isActive={paymentType === 'money'}
-          onClick={() => setPaymentType('money')}
+          isActive={paymentMethod === PaymentEnum.money}
+          onClick={() => handlePaymentMethod(PaymentEnum.money)}
         >
           <Money size={16} />
           DINHEIRO

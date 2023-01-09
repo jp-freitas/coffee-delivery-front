@@ -1,5 +1,5 @@
-import imgOrderDelivery from '../../assets/delivery-order.svg'
-import { OrderInfoConfirmed } from '../../components/OrderInfoConfirmed'
+import imgOrderDelivery from '@/assets/delivery-order.svg'
+import { OrderInfoConfirmed } from '@/components/OrderInfoConfirmed'
 import {
   Container,
   Content,

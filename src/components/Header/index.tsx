@@ -1,9 +1,9 @@
 import { MapPin, ShoppingCart } from 'phosphor-react'
 
 import { Cart, Container, Content, Location } from './styles'
-import logoImg from '../../assets/coffee-delivery.svg'
+import logoImg from '@/assets/coffee-delivery.svg'
 import { NavLink } from 'react-router-dom'
-import { useCart } from '../../hooks/useCart'
+import { useCart } from '@/hooks/useCart'
 
 export function Header() {
   const { cart } = useCart()

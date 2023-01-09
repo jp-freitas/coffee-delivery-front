@@ -1,10 +1,22 @@
-import { createContext, ReactNode, useState } from 'react'
-import { Coffee } from '../@types/coffee'
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from 'react'
+import { Address } from '@/@types/address'
+import { Coffee } from '@/@types/coffee'
 
-import { useCoffee } from '../hooks/useCoffee'
+import { useCoffee } from '@/hooks/useCoffee'
 
 interface CartContextData {
   cart: Coffee[]
+  setCart: Dispatch<SetStateAction<Coffee[]>>
+  address: Address
+  paymentMethod: string
+  setPaymentMethod: Dispatch<SetStateAction<string>>
+  setAddress: Dispatch<SetStateAction<Address>>
   cartSubTotal: number
   delivery: number
   total: number
@@ -33,6 +45,16 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
     return []
   })
+  const [address, setAddress] = useState<Address>({
+    cep: '',
+    street: '',
+    neighborhood: '',
+    complement: '',
+    city: '',
+    state: '',
+    number: '',
+  })
+  const [paymentMethod, setPaymentMethod] = useState('')
   const initialSubTotal = 0
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
     const newSumAmount = { ...sumAmount }
@@ -90,14 +112,14 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   }
 
   function handleIncreaseQuantityInCart(id: string) {
-    const cartItems = cart.map((item) =>
-      item.id === id
+    const cartItems = cart.map((item) => {
+      return item.id === id
         ? {
-          ...item,
-          quantity: item.quantity < 10 ? item.quantity + 1 : item.quantity,
-        }
-        : item,
-    )
+            ...item,
+            quantity: item.quantity < 10 ? item.quantity + 1 : item.quantity,
+          }
+        : item
+    })
     setCart(cartItems)
     localStorage.setItem(
       '@coffee-delivery:cart-1.0.0',
@@ -106,14 +128,14 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   }
 
   function handleDecreaseQuantityInCart(id: string) {
-    const cartItems = cart.map((item) =>
-      item.id === id
+    const cartItems = cart.map((item) => {
+      return item.id === id
         ? {
-          ...item,
-          quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity,
-        }
-        : item,
-    )
+            ...item,
+            quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity,
+          }
+        : item
+    })
     setCart(cartItems)
     localStorage.setItem(
       '@coffee-delivery:cart-1.0.0',
@@ -125,6 +147,11 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     <CartContext.Provider
       value={{
         cart,
+        setCart,
+        address,
+        setAddress,
+        paymentMethod,
+        setPaymentMethod,
         cartSubTotal,
         delivery,
         total,

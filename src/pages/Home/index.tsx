@@ -8,7 +8,7 @@ import {
   InfoSection,
   MainContainer,
 } from './styles'
-import IntroSectionImage from '../../assets/image-intro-section.svg'
+import IntroSectionImage from '@/assets/image-intro-section.svg'
 import { CoffeeList } from './components/CoffeeList'
 
 export function Home() {

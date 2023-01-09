@@ -1,8 +1,8 @@
 import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react'
-import { Coffee } from '../../@types/coffee'
-import { useCart } from '../../hooks/useCart'
-import { useCoffee } from '../../hooks/useCoffee'
-import { formatPrice } from '../../utils/format'
+import { Coffee } from '@/@types/coffee'
+import { useCart } from '@/hooks/useCart'
+import { useCoffee } from '@/hooks/useCoffee'
+import { formatPrice } from '@/utils/format'
 import {
   Amount,
   BuyButton,

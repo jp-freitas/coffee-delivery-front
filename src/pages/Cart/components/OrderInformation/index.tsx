@@ -1,7 +1,7 @@
-import { NavLink } from 'react-router-dom'
-import { CoffeeCardCart } from '../../../../components/CoffeeCardCart'
-import { useCart } from '../../../../hooks/useCart'
-import { formatPrice } from '../../../../utils/format'
+import { useNavigate } from 'react-router-dom'
+import { CoffeeCardCart } from '@/components/CoffeeCardCart'
+import { useCart } from '@/hooks/useCart'
+import { formatPrice } from '@/utils/format'
 import {
   ButtonConfirmation,
   Container,
@@ -13,7 +13,14 @@ import {
 } from './styles'
 
 export function OrderInformation() {
-  const { cart, cartSubTotal, delivery, total } = useCart()
+  const { cart, setCart, cartSubTotal, delivery, total } = useCart()
+  const navigate = useNavigate()
+
+  function handleConfirmOrder() {
+    setCart([])
+    localStorage.setItem('@coffee-delivery:cart-1.0.0', JSON.stringify([]))
+    navigate('/order-confirmation')
+  }
 
   return (
     <Container>
@@ -44,9 +51,12 @@ export function OrderInformation() {
           <p>Total</p>
           <span>{formatPrice(total)}</span>
         </Total>
-        <NavLink to="/order-confirmation" title="Confirmar Pedido">
-          <ButtonConfirmation>CONFIRMAR PEDIDO</ButtonConfirmation>
-        </NavLink>
+        <ButtonConfirmation
+          onClick={handleConfirmOrder}
+          title="Confirmar pedido"
+        >
+          CONFIRMAR PEDIDO
+        </ButtonConfirmation>
       </Resume>
     </Container>
   )
