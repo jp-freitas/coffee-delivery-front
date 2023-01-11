@@ -8,6 +8,10 @@ import { defaultTheme } from './styles/themes/default'
 import { CartContextProvider } from './contexts/CartContext'
 import { CoffeeContextProvider } from './contexts/CoffeeContext'
 import ScrollToTop from './components/ScrollToTop'
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
+
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -16,6 +20,18 @@ export function App() {
           <CartContextProvider>
             <ScrollToTop />
             <Router />
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </CartContextProvider>
         </CoffeeContextProvider>
       </BrowserRouter>

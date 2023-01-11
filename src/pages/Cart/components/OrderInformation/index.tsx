@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
 import { CoffeeCardCart } from '@/components/CoffeeCardCart'
 import { useCart } from '@/hooks/useCart'
 import { formatPrice } from '@/utils/format'
+
 import {
   ButtonConfirmation,
   Container,
@@ -13,10 +16,24 @@ import {
 } from './styles'
 
 export function OrderInformation() {
-  const { cart, setCart, cartSubTotal, delivery, total } = useCart()
+  const {
+    cart,
+    setCart,
+    address,
+    paymentMethod,
+    cartSubTotal,
+    delivery,
+    total,
+  } = useCart()
   const navigate = useNavigate()
+  const verifyAddress = address.cep === ''
+  const verifyPaymentMethod = paymentMethod === ''
 
   function handleConfirmOrder() {
+    if (verifyAddress && verifyPaymentMethod) {
+      toast.warn('Preencha o endereço e selecione o método de pagamento!')
+      return
+    }
     setCart([])
     localStorage.setItem('@coffee-delivery:cart-1.0.0', JSON.stringify([]))
     navigate('/order-confirmation')

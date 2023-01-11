@@ -23,6 +23,7 @@ export const Content = styled.div`
 
   img {
     margin-left: 0;
+    cursor: pointer;
   }
 
   nav {
