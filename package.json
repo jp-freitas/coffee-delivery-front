@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "eslint-check": "eslint src --ext .ts,tsx",
     "eslint-fix": "eslint src --ext .ts,tsx --fix",
-    "server": "json-server server.json -p 3333"
+    "server": "json-server server.json -p 5174"
   },
   "dependencies": {
     "axios": "^1.2.1",
