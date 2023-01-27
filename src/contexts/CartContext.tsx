@@ -3,6 +3,7 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useReducer,
   useState,
 } from 'react'
 import { Address } from '@/@types/address'
@@ -12,7 +13,6 @@ import { useCoffee } from '@/hooks/useCoffee'
 
 interface CartContextData {
   cart: Coffee[]
-  setCart: Dispatch<SetStateAction<Coffee[]>>
   address: Address
   paymentMethod: string
   setPaymentMethod: Dispatch<SetStateAction<string>>
@@ -38,13 +38,12 @@ export const CartContext = createContext<CartContextData>({} as CartContextData)
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const { coffees, resetQuantity } = useCoffee()
-  const [cart, setCart] = useState<Coffee[]>(() => {
-    const storagedCart = localStorage.getItem('@coffee-delivery:cart-1.0.0')
-    if (storagedCart) {
-      return JSON.parse(storagedCart)
+  const [cart, dispatch] = useReducer((state: Coffee[], action: any) => {
+    if (action.type === 'ADD_NEW_PRODUCT') {
+      return [...state, action.payload.updatedCart]
     }
-    return []
-  })
+    return state
+  }, [])
   const [address, setAddress] = useState<Address>({
     cep: '',
     street: '',
@@ -92,11 +91,11 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
           throw Error('Café não encontrado')
         }
       }
-      setCart(updatedCart)
-      localStorage.setItem(
-        '@coffee-delivery:cart-1.0.0',
-        JSON.stringify(updatedCart),
-      )
+      dispatch({
+        type: 'ADD_NEW_PRODUCT',
+        payload: { updatedCart },
+      })
+      // setCart(updatedCart)
     } catch {
       throw Error('Erro ao adicionar produto')
     }
@@ -104,50 +103,58 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
   function handleRemoveItemFromCart(id: string) {
     const cartItems = cart.filter((item) => item.id !== id)
-    setCart(cartItems)
-    localStorage.setItem(
-      '@coffee-delivery:cart-1.0.0',
-      JSON.stringify(cartItems),
-    )
+    dispatch({
+      type: 'REMOVE_PRODUCT_FROM_CART',
+      payload: {
+        cartItems,
+      },
+    })
+    // setCart(cartItems)
+    // localStorage.setItem(
+    //   '@coffee-delivery:cart-1.0.0',
+    //   JSON.stringify(cartItems),
+    // )
   }
 
   function handleIncreaseQuantityInCart(id: string) {
     const cartItems = cart.map((item) => {
       return item.id === id
         ? {
-            ...item,
-            quantity: item.quantity < 10 ? item.quantity + 1 : item.quantity,
-          }
+          ...item,
+          quantity: item.quantity < 10 ? item.quantity + 1 : item.quantity,
+        }
         : item
     })
-    setCart(cartItems)
-    localStorage.setItem(
-      '@coffee-delivery:cart-1.0.0',
-      JSON.stringify(cartItems),
-    )
+    dispatch({
+      type: 'INCREASE_PRODUCT_QUANTITY',
+      payload: {
+        cartItems,
+      },
+    })
   }
 
   function handleDecreaseQuantityInCart(id: string) {
     const cartItems = cart.map((item) => {
       return item.id === id
         ? {
-            ...item,
-            quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity,
-          }
+          ...item,
+          quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity,
+        }
         : item
     })
-    setCart(cartItems)
-    localStorage.setItem(
-      '@coffee-delivery:cart-1.0.0',
-      JSON.stringify(cartItems),
-    )
+    dispatch({
+      type: 'DECREASE_PRODUCT_QUANTITY',
+      payload: {
+        cartItems,
+      },
+    })
+    // setCart(cartItems)
   }
 
   return (
     <CartContext.Provider
       value={{
         cart,
-        setCart,
         address,
         setAddress,
         paymentMethod,

@@ -18,7 +18,7 @@ import {
 export function OrderInformation() {
   const {
     cart,
-    setCart,
+    // setCart,
     address,
     paymentMethod,
     cartSubTotal,
@@ -34,10 +34,12 @@ export function OrderInformation() {
       toast.warn('Preencha o endereço e selecione o método de pagamento!')
       return
     }
-    setCart([])
+    // setCart([])
     localStorage.setItem('@coffee-delivery:cart-1.0.0', JSON.stringify([]))
     navigate('/order-confirmation')
   }
+
+  console.log(cart)
 
   return (
     <Container>
