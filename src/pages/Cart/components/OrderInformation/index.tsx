@@ -16,43 +16,36 @@ import {
 } from './styles'
 
 export function OrderInformation() {
-  const {
-    cart,
-    // setCart,
-    address,
-    paymentMethod,
-    cartSubTotal,
-    delivery,
-    total,
-  } = useCart()
+  const { cart, paymentMethod, cartSubTotal, delivery, total } = useCart()
   const navigate = useNavigate()
-  const verifyAddress = address.cep === ''
+  // const verifyAddress = address.cep === ''
   const verifyPaymentMethod = paymentMethod === ''
 
-  function handleConfirmOrder() {
-    if (verifyAddress && verifyPaymentMethod) {
-      toast.warn('Preencha o endereço e selecione o método de pagamento!')
-      return
-    }
-    // setCart([])
-    localStorage.setItem('@coffee-delivery:cart-1.0.0', JSON.stringify([]))
-    navigate('/order-confirmation')
-  }
+  const productsList = cart.map((item) => item.products)
+  console.log(productsList)
 
-  console.log(cart)
+  // function handleConfirmOrder() {
+  //   if (verifyAddress && verifyPaymentMethod) {
+  //     toast.warn('Preencha o endereço e selecione o método de pagamento!')
+  //     return
+  //   }
+  //   // setCart([])
+  //   localStorage.setItem('@coffee-delivery:cart-1.0.0', JSON.stringify([]))
+  //   navigate('/order-confirmation')
+  // }
+
+  // console.log(cart)
 
   return (
     <Container>
       <ItemsList>
-        {cart.map((item) => {
+        {productsList.map((product) => {
           return (
             <CoffeeCardCart
-              key={item.id}
-              id={item.id}
-              image={item.image}
-              name={item.name}
-              quantity={item.quantity}
-              price={item.price}
+              key={product.product_id}
+              id={product.product_id}
+              quantity={product.quantity}
+              price={product.price}
             />
           )
         })}
@@ -71,7 +64,7 @@ export function OrderInformation() {
           <span>{formatPrice(total)}</span>
         </Total>
         <ButtonConfirmation
-          onClick={handleConfirmOrder}
+          // onClick={handleConfirmOrder}
           title="Confirmar pedido"
         >
           CONFIRMAR PEDIDO

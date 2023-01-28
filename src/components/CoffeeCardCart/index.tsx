@@ -14,41 +14,57 @@ import {
   PlusContainer,
   RemoveButton,
 } from './styles'
+import { useCoffee } from '@/hooks/useCoffee'
+import { toast } from 'react-toastify'
 
 interface CoffeeCardCartProps {
   id: string
-  image: string
-  name: string
   quantity: number
   price: number
 }
 
-export function CoffeeCardCart({
-  id,
-  image,
-  name,
-  quantity,
-  price,
-}: CoffeeCardCartProps) {
+export function CoffeeCardCart({ id, quantity, price }: CoffeeCardCartProps) {
+  const { coffees } = useCoffee()
   const {
     handleIncreaseQuantityInCart,
     handleDecreaseQuantityInCart,
     handleRemoveItemFromCart,
   } = useCart()
   const priceFormatted = formatPrice(price * quantity).slice(3)
+  const coffee = coffees.find((coffee) => coffee.id === id)
+
+  function handleIncrease(id: string, quantity: number) {
+    if (quantity === 10) {
+      toast.warn('Quantidade máxima permitida')
+      return
+    }
+    handleIncreaseQuantityInCart(id)
+  }
+
+  function handleDecrease(id: string, quantity: number) {
+    if (quantity === 1) {
+      toast.warn('Quantidade mínima permitida')
+      return
+    }
+    handleDecreaseQuantityInCart(id)
+  }
+
   return (
     <Container>
       <InfoContainer>
-        <img src={image} alt={`Imagem representativa de ${name}`} />
+        <img
+          src={coffee!.image}
+          alt={`Imagem representativa de ${coffee!.name}`}
+        />
         <InfoContent>
-          <Name>{name}</Name>
+          <Name>{coffee!.name}</Name>
           <ActionContainer>
             <Count>
-              <MinusContainer onClick={() => handleDecreaseQuantityInCart(id)}>
+              <MinusContainer onClick={() => handleDecrease(id, quantity)}>
                 <Minus size={14} weight="bold" />
               </MinusContainer>
               <Number>{quantity}</Number>
-              <PlusContainer onClick={() => handleIncreaseQuantityInCart(id)}>
+              <PlusContainer onClick={() => handleIncrease(id, quantity)}>
                 <Plus size={14} weight="bold" />
               </PlusContainer>
             </Count>

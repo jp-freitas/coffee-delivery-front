@@ -1,7 +1,7 @@
 import { MapPinLine } from 'phosphor-react'
 import { ChangeEvent, createRef, forwardRef, InputHTMLAttributes } from 'react'
 import { useCart } from '@/hooks/useCart'
-import { cep } from '@/services/cep'
+// import { cep } from '@/services/cep'
 import {
   AddressSection,
   AddressSectionContent,
@@ -24,36 +24,36 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 })
 
 export function Address() {
-  const { address, setAddress } = useCart()
+  const { cart } = useCart()
   const numberRef = createRef<HTMLInputElement>()
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setAddress((prevState) => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
-    }))
-  }
+  // function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+  //   setAddress((prevState) => ({
+  //     ...prevState,
+  //     [event.target.name]: event.target.value,
+  //   }))
+  // }
 
-  async function validateCEP() {
-    const response = await cep.get(`/${address.cep}`)
-    setAddress((prevState) => ({
-      ...prevState,
-      street: '...',
-      neighborhood: '...',
-      city: '...',
-      state: '...',
-    }))
-    setTimeout(() => {
-      setAddress((prevState) => ({
-        ...prevState,
-        state: response.data.state,
-        city: response.data.city,
-        neighborhood: response.data.neighborhood,
-        street: response.data.street,
-      }))
-    }, 1000)
-    numberRef.current?.focus()
-  }
+  // async function validateCEP() {
+  //   const response = await cep.get(`/${address.cep}`)
+  //   setAddress((prevState) => ({
+  //     ...prevState,
+  //     street: '...',
+  //     neighborhood: '...',
+  //     city: '...',
+  //     state: '...',
+  //   }))
+  //   setTimeout(() => {
+  //     setAddress((prevState) => ({
+  //       ...prevState,
+  //       state: response.data.state,
+  //       city: response.data.city,
+  //       neighborhood: response.data.neighborhood,
+  //       street: response.data.street,
+  //     }))
+  //   }, 1000)
+  //   numberRef.current?.focus()
+  // }
 
   return (
     <AddressSection>
@@ -73,17 +73,17 @@ export function Address() {
           pattern="[0-9]*"
           inputMode="numeric"
           maxLength={8}
-          value={address.cep}
-          onChange={handleInputChange}
-          onBlur={validateCEP}
+        // value={cart.address.cep}
+        // onChange={handleInputChange}
+        // onBlur={validateCEP}
         />
         <Input
           required
           name="street"
           type="text"
           placeholder="Rua"
-          value={address.street}
-          onChange={handleInputChange}
+        // value={address.street}
+        // onChange={handleInputChange}
         />
         <FirstGroup>
           <Input
@@ -93,16 +93,16 @@ export function Address() {
             pattern="[0-9]*"
             inputMode="numeric"
             placeholder="Número"
-            value={address.number}
-            onChange={handleInputChange}
+            // value={address.number}
+            // onChange={handleInputChange}
             ref={numberRef}
           />
           <Input
             name="complement"
             type="text"
             placeholder="Complemento"
-            value={address.complement}
-            onChange={handleInputChange}
+          // value={address.complement}
+          // onChange={handleInputChange}
           />
         </FirstGroup>
         <SecondGroup>
@@ -111,24 +111,24 @@ export function Address() {
             name="neighborhood"
             type="text"
             placeholder="Bairro"
-            value={address.neighborhood}
-            onChange={handleInputChange}
+          // value={address.neighborhood}
+          // onChange={handleInputChange}
           />
           <Input
             required
             name="city"
             type="text"
             placeholder="Cidade"
-            value={address.city}
-            onChange={handleInputChange}
+          // value={address.city}
+          // onChange={handleInputChange}
           />
           <Input
             required
             name="state"
             type="text"
             placeholder="UF"
-            value={address.state}
-            onChange={handleInputChange}
+          // value={address.state}
+          // onChange={handleInputChange}
           />
         </SecondGroup>
       </AddressSectionContent>
