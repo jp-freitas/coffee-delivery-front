@@ -16,12 +16,12 @@ import {
 } from './styles'
 
 export function OrderInformation() {
-  const { cart, paymentMethod, cartSubTotal, delivery, total } = useCart()
+  const { cart, paymentMethod, delivery } = useCart()
   const navigate = useNavigate()
   // const verifyAddress = address.cep === ''
   const verifyPaymentMethod = paymentMethod === ''
 
-  const productsList = cart.map((item) => item.products)
+  const productsList = cart.map((item) => item)
   console.log(productsList)
 
   // function handleConfirmOrder() {
@@ -40,6 +40,7 @@ export function OrderInformation() {
     <Container>
       <ItemsList>
         {productsList.map((product) => {
+          console.log(product)
           return (
             <CoffeeCardCart
               key={product.product_id}
@@ -53,7 +54,7 @@ export function OrderInformation() {
       <Resume>
         <Items>
           <p>Total de itens</p>
-          <span>{formatPrice(cartSubTotal)}</span>
+          {/* <span>{formatPrice(cartSubTotal)}</span> */}
         </Items>
         <Delivery>
           <p>Entrega</p>
@@ -61,7 +62,7 @@ export function OrderInformation() {
         </Delivery>
         <Total>
           <p>Total</p>
-          <span>{formatPrice(total)}</span>
+          {/* <span>{formatPrice(total)}</span> */}
         </Total>
         <ButtonConfirmation
           // onClick={handleConfirmOrder}
