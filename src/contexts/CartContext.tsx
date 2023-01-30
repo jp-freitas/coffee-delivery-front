@@ -22,9 +22,9 @@ interface CartContextData {
   cart: ProductInCart[]
   paymentMethod: string
   setPaymentMethod: Dispatch<SetStateAction<string>>
-  // cartSubTotal: number
+  cartSubTotal: number
   delivery: number
-  // total: number
+  total: number
   addNewProduct: (id: string) => void
   handleIncreaseQuantityInCart: (id: string) => void
   handleDecreaseQuantityInCart: (id: string) => void
@@ -48,18 +48,18 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
   const { cart } = cartState
   console.log(cart)
-  // const initialSubTotal = 0
-  // const cartItemsAmount = cart.reduce((sumAmount, product) => {
-  //   const newSumAmount = { ...sumAmount }
-  //   newSumAmount[product.id] = product.price * product.quantity
-  //   return newSumAmount
-  // }, {} as CartItemsAmount)
-  // const cartSubTotal = cart.reduce(
-  //   (subTotal, item) => subTotal + cartItemsAmount[item.id],
-  //   initialSubTotal,
-  // )
+  const initialSubTotal = 0
+  const cartItemsAmount = cart.reduce((sumAmount, product) => {
+    const newSumAmount = { ...sumAmount }
+    newSumAmount[product.id] = product.price * product.quantity
+    return newSumAmount
+  }, {} as CartItemsAmount)
+  const cartSubTotal = cart.reduce(
+    (subTotal, item) => subTotal + cartItemsAmount[item.id],
+    initialSubTotal,
+  )
   const delivery = cart.length === 0 ? 0 : 3.5
-  // const total = cartSubTotal + delivery
+  const total = cartSubTotal + delivery
 
   function addNewProduct(id: string) {
     const findCoffeeInCart = cart.find((coffee) => coffee.product_id === id)
@@ -99,9 +99,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         cart,
         paymentMethod,
         setPaymentMethod,
-        // cartSubTotal,
+        cartSubTotal,
         delivery,
-        // total,
+        total,
         addNewProduct,
         handleIncreaseQuantityInCart,
         handleDecreaseQuantityInCart,

@@ -16,7 +16,7 @@ import {
 } from './styles'
 
 export function OrderInformation() {
-  const { cart, paymentMethod, delivery } = useCart()
+  const { cart, paymentMethod, delivery, total, cartSubTotal } = useCart()
   const navigate = useNavigate()
   // const verifyAddress = address.cep === ''
   const verifyPaymentMethod = paymentMethod === ''
@@ -54,7 +54,7 @@ export function OrderInformation() {
       <Resume>
         <Items>
           <p>Total de itens</p>
-          {/* <span>{formatPrice(cartSubTotal)}</span> */}
+          <span>{formatPrice(cartSubTotal)}</span>
         </Items>
         <Delivery>
           <p>Entrega</p>
@@ -62,7 +62,7 @@ export function OrderInformation() {
         </Delivery>
         <Total>
           <p>Total</p>
-          {/* <span>{formatPrice(total)}</span> */}
+          <span>{formatPrice(total)}</span>
         </Total>
         <ButtonConfirmation
           // onClick={handleConfirmOrder}
