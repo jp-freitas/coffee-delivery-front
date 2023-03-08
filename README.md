@@ -45,4 +45,4 @@ This project is on MIT license.
 
 ---
 
-Made with ♥ by TecJP :wave:
+Made with ♥ by jp-freitas :wave:
